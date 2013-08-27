@@ -1,7 +1,5 @@
-py2journal
-==========
-
-Creates Journal of engineering students for term-work submission in matter of seconds.
+ 
+ Creates Journal of engineering students for term-work submission in matter of seconds.
 
 Needed Software:
 Python
@@ -55,7 +53,7 @@ Root directory should contain folders named:
   Example attached.
   
   
-  
+ 
   Contact info:
   
   Jenil Shah
