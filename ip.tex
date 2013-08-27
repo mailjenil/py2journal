@@ -1,0 +1,298 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage{graphicx}
+\addtolength{\oddsidemargin}{-.875in}
+\addtolength{\evensidemargin}{-.875in}
+\addtolength{\textwidth}{1.75in}
+\addtolength{\topmargin}{-.875in}
+\addtolength{\textheight}{1.75in}
+\usepackage[T1]{fontenc}
+\begin{document}
+\begin{center}
+\Huge\textbf{LAB 1}\\
+\large{To study Sampling and Quantization of Image
+}
+\end{center}
+\vspace{1.0cm}
+\begin{enumerate}
+\item\textbf{Sampling of the image
+}
+\begin{verbatim}
+clc;
+clear all;
+close all;
+p=imread('cameraman.tif');
+[m n]=size(p);
+p=double(p);
+
+for i=1:2:m
+   
+    for j=1:2:n
+       q=p(i,j);
+       if((q>=0) && (q<=15))
+           f(i,j)=15;
+       elseif((q>15) && (q<=30))
+           f(i,j)=30;
+            elseif((q>30) && (q<=45))
+           f(i,j)=45;
+            elseif((q>45) && (q<=60))
+           f(i,j)=60;
+            elseif((q>60) && (q<=75))
+           f(i,j)=75;
+            elseif((q>75) && (q<=90))
+           f(i,j)=90;
+           elseif((q>90) && (q<=105))
+           f(i,j)=105;
+            elseif((q>105) && (q<=120))
+           f(i,j)=120;
+           elseif((q>120) && (q<=135))
+           f(i,j)=135;
+            elseif((q>135) && (q<=150))
+           f(i,j)=150;
+           elseif((q>150) && (q<=165))
+           f(i,j)=165;
+            elseif((q>165) && (q<=180))
+           f(i,j)=180;
+           elseif((q>180) && (q<=195))
+           f(i,j)=195;
+            elseif((q>195) && (q<=210))
+           f(i,j)=210;
+           elseif((q>210) && (q<=225))
+           f(i,j)=225;
+            elseif((q>225) && (q<=240))
+           f(i,j)=240;
+       else
+           f(i,j)=255;
+       end
+    end
+end
+p=uint8(p);
+imshow(p);
+figure;
+imhist(p);
+figure;
+
+f=uint8(f);
+imshow(f);
+figure;
+imhist(f);
+\end{verbatim}\vspace{0.5cm}
+\item\textbf{Sampling of the Image
+}
+\begin{verbatim}
+clc;
+clear all;
+close all;
+p=imread('cameraman.tif');
+[m n]=size(p);
+u=1;
+
+for i=1:2:m
+    v=1;
+    for j=1:2:n
+       f(u,v)=p(i,j);
+       v=v+1;
+    end
+     u=u+1;
+end
+imshow(p);
+figure;
+imshow(f);
+\end{verbatim}\vspace{0.5cm}
+
+\end{enumerate}
+\pagebreak\begin{center}
+\Huge\textbf{LAB 2}\\
+\large{Spatial Domain Transformations
+}
+\end{center}
+\vspace{1.0cm}
+\begin{enumerate}
+\item\textbf{To study Bit-Plane Slicing
+}
+\begin{verbatim}
+clc;
+clear all;
+close all;
+a=imread('bitplane.tif');
+b=mod(a,2);
+a=a/2;
+b=b*128;
+subplot(3,3,1);
+imshow(a);
+b=mod(a,2);
+a=a/2;
+b=b*64;
+subplot(3,3,2);
+imshow(a);
+b=mod(a,2);
+a=a/2;
+b=b*32;
+subplot(3,3,3);
+imshow(a);
+b=mod(a,2);
+a=a/2;
+b=b*16;
+subplot(3,3,4);
+imshow(a);
+b=mod(a,2);
+a=a/2;
+b=b*8;
+subplot(3,3,5);
+imshow(a);
+b=mod(a,2);
+a=a/2;
+b=b*4;
+subplot(3,3,6);
+imshow(a);
+b=mod(a,2);
+a=a/2;
+b=b*2;
+subplot(3,3,7);
+imshow(a);
+b=mod(a,2);
+a=a/2;
+b=b*1;
+subplot(3,3,8);
+imshow(a);
+\end{verbatim}\vspace{0.5cm}
+\item\textbf{To Study Contrast Streching
+}
+\begin{verbatim}
+clc;
+clear all;
+close all;
+b=imread('contraststretch.tif');
+[m n]=size(b);
+r1=input('enter r1: ');
+r2=input('enter r2: ');
+s1=input('enter s1: ');
+s2=input('enter s2: ');
+for i=1:m
+    for j=1:n
+         if((b(i,j)<r1))
+        c(i,j)=s1/r1*(b(i,j));
+        
+         elseif((b(i,j)>=r1) && (b(i,j)<=r2))
+        c(i,j)=((s2-s1)/(r2-r1)*(b(i,j)-r1))+s1;
+        else
+          c(i,j)=((s2-255)/(r2-255)*(b(i,j)-255))+255;   
+        end
+    end
+end
+imshow(b);
+figure;
+imshow(c);\end{verbatim}\vspace{0.5cm}
+\item\textbf{Dont know what this code is about
+}
+\begin{verbatim}
+b=imread('pout.tif');
+t=input('start:');
+y=input('end: ');
+%q=input('scale: ');
+
+[m n] = size(b);
+
+
+for a=1:m
+    for c=1:n
+        e=b(a,c);
+        if( (e>=t) && (e<=y))
+                
+               p(a,c)=150;
+                
+        else
+            p(a,c)=e;
+        end
+    end
+    
+end
+
+imshow(b);
+figure;
+imshow(p);\end{verbatim}\vspace{0.5cm}
+\item\textbf{Log Transformation
+}
+\begin{verbatim}
+clc;
+clear all;
+close all;
+b=imread('logtm.tif');
+[m n]=size(b);
+b=double(b);
+for i=1:m
+    for j=1:n
+        c(i,j)=10*log(1+b(i,j));
+    end
+end
+a=uint8(c);
+imshow(b);
+figure;
+imshow(a);\end{verbatim}\vspace{0.5cm}
+\item\textbf{Power Law Transformation
+}
+\begin{verbatim}
+clc;
+clear all;
+close all;
+b=imread('powerlaw.tif');
+[m n]=size(b);
+b=double(b);
+for i=1:m
+    for j=1:n
+        c(i,j)=1*b(i,j)^(0.5);
+    end
+end
+a=uint8(c);
+d=uint8(b);
+imshow(d);
+figure;
+imshow(a);\end{verbatim}\vspace{0.5cm}
+
+\end{enumerate}
+\pagebreak\begin{center}
+\Huge\textbf{LAB 3}\\
+\large{Histogram Processing
+}
+\end{center}
+\vspace{1.0cm}
+\begin{enumerate}
+\item\textbf{Plot Histogram
+}
+\begin{verbatim}
+b=imread('pout.tif');
+[m n]=size(b);
+for i=1:m
+    for j=1:n
+        a(i,j)=255-b(i,j);
+    end
+end
+imshow(b);
+figure;
+imshow(a);
+\end{verbatim}\vspace{0.5cm}
+\item\textbf{Histogram Matching
+}
+\begin{verbatim}
+b=imread('pout.tif');
+
+[m,n] = size(b)
+p=zeros(1,256);
+%z=zeros(1,256);
+for i=1:256
+ %   z(i)=i;
+for a=1:m
+    for c=1:n
+        if(b(a,c)==(i-1))
+                
+               p(i)=p(i)+1;
+                
+        end
+    end
+    
+end
+end
+stem(p);\end{verbatim}\vspace{0.5cm}
+
+\end{enumerate}
+\pagebreak
+\end{document}
